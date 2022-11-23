@@ -1,0 +1,27 @@
+-- Decompiled with the Synapse X Luau decompiler.
+
+return function(p1, p2, p3)
+	local v1 = RaycastParams.new();
+	v1.FilterType = Enum.RaycastFilterType.Blacklist;
+	v1.FilterDescendantsInstances = { p1, workspace.filter, p3, table.unpack(p2.Humanoid:GetAccessories()) };
+	local v2 = {};
+	table.insert(v2, { workspace:Raycast(p1:FindFirstChild("Right Arm").Position, p1:FindFirstChild("Right Arm").CFrame.LookVector * 10, v1), 0 });
+	table.insert(v2, { workspace:Raycast(p1:FindFirstChild("Right Arm").Position, (p1:FindFirstChild("Right Arm").CFrame * CFrame.Angles(0, -0.017453292519943295, 0)).LookVector.Unit * 10, v1), -1 });
+	table.insert(v2, { workspace:Raycast(p1:FindFirstChild("Right Arm").Position, (p1:FindFirstChild("Right Arm").CFrame * CFrame.Angles(0, 0.017453292519943295, 0)).LookVector.Unit * 10, v1), 1 });
+	table.insert(v2, { workspace:Raycast(p1:FindFirstChild("Right Arm").Position, (p1:FindFirstChild("Right Arm").CFrame * CFrame.Angles(0, 0.03490658503988659, 0)).LookVector.Unit * 10, v1), 2 });
+	table.insert(v2, { workspace:Raycast(p1:FindFirstChild("Right Arm").Position, (p1:FindFirstChild("Right Arm").CFrame * CFrame.Angles(0, -0.03490658503988659, 0)).LookVector.Unit * 10, v1), -2 });
+	workspace.filter:ClearAllChildren();
+	local v3 = math.huge;
+	local v4 = 0;
+	for v5, v6 in pairs(v2) do
+		if v6[1] then
+			local l__Magnitude__7 = (p1:FindFirstChild("Right Arm").Position - v6[1].Position).Magnitude;
+			if l__Magnitude__7 < v3 then
+				v3 = l__Magnitude__7;
+				v4 = v6[2];
+				local l__Position__8 = v6.Position;
+			end;
+		end;
+	end;
+	return v4;
+end;
